@@ -1,9 +1,11 @@
 package com.anys34.swap.controller.sub;
 
 import com.anys34.swap.controller.sub.dto.ListSubResponse;
+import com.anys34.swap.controller.sub.dto.SubResponse;
 import com.anys34.swap.service.sub.SubService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,5 +20,10 @@ public class SubController {
     @GetMapping("/list")
     public List<ListSubResponse> list() {
         return subService.list();
+    }
+
+    @GetMapping("/detail/{id}")
+    public SubResponse detail(@PathVariable Long id) {
+        return subService.detail(id);
     }
 }

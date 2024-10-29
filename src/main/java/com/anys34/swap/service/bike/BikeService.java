@@ -19,7 +19,7 @@ public class BikeService {
         return bikeRepository.save(request.toEntity()).getId();
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public List<ListBikeResponse> list() {
         return bikeRepository.findAll().stream()
                 .map(ListBikeResponse::new)
