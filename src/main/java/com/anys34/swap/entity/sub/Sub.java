@@ -1,6 +1,8 @@
 package com.anys34.swap.entity.sub;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -18,4 +20,6 @@ public class Sub {
     private Integer price;
     private String thumbnail;
     private String detailLink;
+    @Enumerated(EnumType.STRING)
+    private Spac spac;
 }
