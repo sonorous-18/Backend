@@ -27,7 +27,11 @@ public class SubService {
     @Transactional(readOnly = true)
     public List<ListSubResponse> list() {
         return subRepository.findAll().stream()
-                .map(ListSubResponse::new)
+                .map(it -> {
+                    List<Color> colors = colorRepository.findAllBySub(it)
+                            .stream().limit(4).toList();
+                    return new ListSubResponse(it, colors);
+                })
                 .toList();
     }
 
@@ -75,7 +79,12 @@ public class SubService {
         }
 
         return subs.stream()
-                .map(ListSubResponse::new)
+                .map(it -> {
+                    List<Color> colors = colorRepository.findAllBySub(it)
+                            .stream().limit(4).toList();
+                    return new ListSubResponse(it, colors);
+                })
+                .limit(4)
                 .toList();
     }
 
