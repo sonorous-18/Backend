@@ -1,6 +1,8 @@
 package com.anys34.swap.entity.sub;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,5 +24,6 @@ public class Color {
     private Sub sub;
 
     private String thumbnail;
-    private String color;
+    @Enumerated(EnumType.STRING)
+    private ColorSet color;
 }

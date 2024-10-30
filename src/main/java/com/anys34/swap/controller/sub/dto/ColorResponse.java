@@ -1,6 +1,7 @@
 package com.anys34.swap.controller.sub.dto;
 
 import com.anys34.swap.entity.sub.Color;
+import com.anys34.swap.entity.sub.ColorSet;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -9,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class ColorResponse {
     private Long id;
     private String thumbnail;
-    private String color;
+    private ColorSet color;
 
     public ColorResponse(Color color) {
         this.id = color.getId();
