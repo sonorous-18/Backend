@@ -1,6 +1,7 @@
 package com.anys34.swap.controller.sub;
 
 import com.anys34.swap.controller.sub.dto.ListSubResponse;
+import com.anys34.swap.controller.sub.dto.ReviewResponse;
 import com.anys34.swap.controller.sub.dto.SubResponse;
 import com.anys34.swap.service.sub.SubService;
 import lombok.RequiredArgsConstructor;
@@ -25,5 +26,10 @@ public class SubController {
     @GetMapping("/detail/{id}")
     public SubResponse detail(@PathVariable Long id) {
         return subService.detail(id);
+    }
+
+    @GetMapping("/review/{id}")
+    public List<ReviewResponse> review(@PathVariable Long id) {
+        return subService.review(id);
     }
 }
