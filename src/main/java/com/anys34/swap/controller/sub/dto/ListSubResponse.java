@@ -15,7 +15,7 @@ public class ListSubResponse {
     public ListSubResponse(Sub sub) {
         this.id = sub.getId();
         this.title = sub.getTitle();
-        this.thumbnail = sub.getTitle();
+        this.thumbnail = sub.getThumbnail();
         this.price = sub.getPrice();
     }
 }

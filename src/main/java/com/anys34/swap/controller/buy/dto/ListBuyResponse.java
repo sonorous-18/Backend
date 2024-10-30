@@ -21,7 +21,7 @@ public class ListBuyResponse {
         this.title = color.getSub().getTitle();
         this.price = color.getSub().getPrice();
         this.nextBuyDate = buy.getNextBuyDate();
-        Period p = Period.between(LocalDate.now(), buy.getNextBuyDate());
+        Period p = Period.between(LocalDate.now(), buy.getBuyDate());
         this.useDate = p.getDays();
     }
 }

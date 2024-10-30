@@ -16,5 +16,6 @@ public class Sub {
     private Long id;
     private String title;
     private Integer price;
+    private String thumbnail;
     private String detailLink;
 }
