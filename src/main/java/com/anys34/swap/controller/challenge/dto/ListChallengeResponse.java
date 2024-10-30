@@ -10,10 +10,14 @@ public class ListChallengeResponse {
     private String title;
     private Integer percentage;
     private Boolean isClear;
+    private Integer point;
+    private Integer totalPoints;
 
     public ListChallengeResponse(Challenge challenge) {
         this.title = challenge.getTitle();
         this.percentage = challenge.getPercentage();
         this.isClear = challenge.getIsClear();
+        this.point = challenge.getPoint();
+        this.totalPoints = challenge.getTotalPoints();
     }
 }

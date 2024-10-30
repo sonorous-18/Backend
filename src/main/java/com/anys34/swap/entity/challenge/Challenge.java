@@ -16,10 +16,8 @@ public class Challenge {
     private Long id;
 
     private String title;
+    private Integer point;
+    private Integer totalPoints;
     private Integer percentage = 0;
     private Boolean isClear = false;
-
-    public Challenge(String title) {
-        this.title = title;
-    }
 }
