@@ -29,4 +29,5 @@ dependencies {
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'com.mysql:mysql-connector-j'
     annotationProcessor 'org.projectlombok:lombok'
+    implementation("com.googlecode.json-simple:json-simple:1.1.1")
 }

@@ -1,6 +1,5 @@
 package com.anys34.swap.service.sub;
 
-import com.anys34.swap.controller.sub.dto.FilterRequest;
 import com.anys34.swap.controller.sub.dto.ListSubResponse;
 import com.anys34.swap.controller.sub.dto.ReviewResponse;
 import com.anys34.swap.controller.sub.dto.SubResponse;
@@ -8,6 +7,7 @@ import com.anys34.swap.entity.sub.Color;
 import com.anys34.swap.entity.sub.ColorRepository;
 import com.anys34.swap.entity.sub.ColorSet;
 import com.anys34.swap.entity.sub.ReviewRepository;
+import com.anys34.swap.entity.sub.Spac;
 import com.anys34.swap.entity.sub.Sub;
 import com.anys34.swap.entity.sub.SubRepository;
 import lombok.RequiredArgsConstructor;
@@ -25,17 +25,6 @@ public class SubService {
     private final ReviewRepository reviewRepository;
 
     @Transactional(readOnly = true)
-    public List<ListSubResponse> list() {
-        return subRepository.findAll().stream()
-                .map(it -> {
-                    List<Color> colors = colorRepository.findAllBySub(it)
-                            .stream().limit(4).toList();
-                    return new ListSubResponse(it, colors);
-                })
-                .toList();
-    }
-
-    @Transactional(readOnly = true)
     public SubResponse detail(Long id) {
         Sub sub = subRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("찾을 수 없습니다."));
@@ -51,40 +40,39 @@ public class SubService {
                 .toList();
     }
 
-    public List<ListSubResponse> filter(FilterRequest request) {
+    public List<ListSubResponse> filter(List<ColorSet> colors, Integer startMoney, Integer endMoney, List<Spac> spaces) {
         List<Sub> subs = subRepository.findAll();
 
-        if (request.getColors() != null && !request.getColors().isEmpty()) {
+        if (colors != null && !colors.isEmpty()) {
             subs = subs.stream()
-                    .filter(sub -> subHasColor(sub, request.getColors()))
+                    .filter(sub -> subHasColor(sub, colors))
                     .collect(Collectors.toList());
         }
 
-        if (request.getStartMoney() != null) {
+        if (startMoney != null) {
             subs = subs.stream()
-                    .filter(sub -> sub.getPrice() != null && sub.getPrice() >= request.getStartMoney())
+                    .filter(sub -> sub.getPrice() != null && sub.getPrice() >= startMoney)
                     .collect(Collectors.toList());
         }
 
-        if (request.getEndMoney() != null) {
+        if (endMoney != null) {
             subs = subs.stream()
-                    .filter(sub -> sub.getPrice() != null && sub.getPrice() <= request.getEndMoney())
+                    .filter(sub -> sub.getPrice() != null && sub.getPrice() <= endMoney)
                     .collect(Collectors.toList());
         }
 
-        if (request.getSpaces() != null && !request.getSpaces().isEmpty()) {
+        if (spaces != null && !spaces.isEmpty()) {
             subs = subs.stream()
-                    .filter(sub -> request.getSpaces().contains(sub.getSpac()))
+                    .filter(sub -> spaces.contains(sub.getSpac()))
                     .collect(Collectors.toList());
         }
 
         return subs.stream()
                 .map(it -> {
-                    List<Color> colors = colorRepository.findAllBySub(it)
+                    List<Color> color = colorRepository.findAllBySub(it)
                             .stream().limit(4).toList();
-                    return new ListSubResponse(it, colors);
+                    return new ListSubResponse(it, color);
                 })
-                .limit(4)
                 .toList();
     }
 
